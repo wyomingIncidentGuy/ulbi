@@ -1,8 +1,6 @@
 <template>
   <div class = "app">
       <postForm 
-      :title="title" 
-      :body="body" 
       @createPost="createPost"
       />
 
@@ -27,24 +25,20 @@
           {id: 4, title:'Javascript 4', body: 'post description 4'}
         ],
 
-        title: '',
-        body:'',
-
       }
      
     },
 
       methods: {
 
-        createPost(){
+        createPost(title, body){
           const newPost = {
             id:Date.now(),
-            title:this.title,
-            body:this.body
-          }
+            title:title,
+            body:body
+          };
+
           this.posts.push(newPost);
-          this.title = '',
-          this.body = ''
         }
 
       },
