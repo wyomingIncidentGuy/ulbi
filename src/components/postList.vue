@@ -1,23 +1,22 @@
 <template>
-    <div class="post" v-for="post in posts">
-        <div><strong>Название:</strong>{{ post.title }}</div>
-        <div><strong>Описание:</strong>{{ post.body }}</div>
-    </div>
+    <postItem 
+    v-for="post in posts"
+    :post="post"
+    />
 </template>
 
 <script>
+    import postItem from './postItem.vue';
     export default{
+        components: {
+            postItem
+        },
         props: {
             posts: {
                 type: Array,
                 required: true
             }
         },
-        data(){
-            return{
-                
-            }
-        }
     }
 </script>
 

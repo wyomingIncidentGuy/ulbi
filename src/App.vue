@@ -70,32 +70,4 @@
   button {
    cursor: pointer;
   }
-
-  .post{
-    margin-top:15px;
-    padding:15px;
-    border:2px solid darkgreen;
-  }
-
-  form{
-    display: flex;
-    flex-direction: column;
-
-  }
-
-  .input{
-    width: 100%;
-    border: 1px solid darkgreen;
-    padding: 10px 15px;
-    margin-top:15px;
-  }
-
-  .btn{
-    align-self:flex-end;
-    margin-top: 15px;
-    padding: 10px 15px;
-    background: none;
-    color:darkgreen;
-    border: 1px solid darkgreen;
-  }
 </style>

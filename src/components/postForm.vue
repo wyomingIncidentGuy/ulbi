@@ -3,17 +3,27 @@
         <h4>Создание поста</h4>
         <input v-model="title" class = "input" type="text" placeholder = "Название поста">
         <input v-model="body" class = "input" type="text" placeholder="Описание поста">
-        <button class = "btn" @click = "create">Опубликовать</button>
+        <myButton 
+        class = "btn" 
+        @click = "create"
+        >Опубликовать</myButton>
     </form>
 </template>
 
 <script>
+    import myButton from './UI/myButton.vue';
+
     export default{
+
+        components: {
+            myButton,
+        },
+
         emits:['createPost'],
         data(){
             return{
                 title:'',
-                body:''
+                body:'',
             }
         },
         methods:{
@@ -27,5 +37,16 @@
 </script>
 
 <style>
+form{
+    display: flex;
+    flex-direction: column;
 
+  }
+
+  .input{
+    width: 100%;
+    border: 1px solid darkgreen;
+    padding: 10px 15px;
+    margin-top:15px;
+  }
 </style>
