@@ -5,16 +5,12 @@
             <div><strong>Описание:</strong>{{ post.body }}</div>
         </div>
         <div class="post__buttons">
-            <myButton
-            class="btn"
-            @click="delete"
-            >удалить</myButton>
+            <myButton @click="delete">удалить</myButton>
         </div>
     </div>
 </template>
 
 <script>
-    import myButton from './UI/myButton.vue';
     export default{
         emits:[],
 
@@ -30,10 +26,6 @@
 
             }
         },
-
-        components: {
-            myButton
-        }
     }
 </script>
 

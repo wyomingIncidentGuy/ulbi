@@ -1,29 +1,18 @@
 <template>
-    <button @click="importedMethod('create')">
+    <button>
         <slot></slot>
     </button>
 </template>
 
 <script>
     export default{
-        emits: ['create'],
-        props:{
-            
-        },
-
-        methods: {
-            importedMethod(methodName){
-                this.$emit(methodName)
-            }
-        }
-
+        name: 'myButton'
     }
 </script>
 
 <style>
-    .btn{
+    button{
     align-self:flex-end;
-    margin-top: 15px;
     padding: 10px 15px;
     background: none;
     color:darkgreen;

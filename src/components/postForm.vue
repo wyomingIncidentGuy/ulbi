@@ -3,22 +3,12 @@
         <h4>Создание поста</h4>
         <input v-model="title" class = "input" type="text" placeholder = "Название поста">
         <input v-model="body" class = "input" type="text" placeholder="Описание поста">
-        <myButton 
-        class = "btn" 
-        @click = "create"
-        >Опубликовать</myButton>
+        <myButton @click = "create">Опубликовать</myButton>
     </form>
 </template>
 
 <script>
-    import myButton from './UI/myButton.vue';
-
     export default{
-
-        components: {
-            myButton,
-        },
-
         emits:['createPost'],
         data(){
             return{
