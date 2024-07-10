@@ -27,6 +27,9 @@
 
 <style scoped>
     .dialog{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position:fixed;
         top:0;
         bottom:0;
@@ -39,8 +42,6 @@
         margin:auto;
         background: white;
         border-radius: 12px;
-        min-width: 300px;
-        min-height: 50px;
         padding:20px;
     }
 </style>
