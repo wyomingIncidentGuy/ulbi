@@ -2,7 +2,10 @@
   <div class = "app">
     <div class="app__buttons">
         <myButton @click="showDialog">создать пост</myButton>
-        <mySelect></mySelect>
+        <mySelect 
+        v-model="selectedSort"
+        :options="sortOptions"
+        />
     </div>
 
     <myDialog v-model:show="dialogVisible">
@@ -32,7 +35,13 @@
         posts: [],
 
         dialogVisible: false,
-        isPostLoading: false
+        isPostLoading: false,
+        selectedSort:'',
+
+        sortOptions: [
+          {value: 'title', name: 'По названию'},
+          {value: 'body', name: 'По содержимому'}
+        ]
 
       }
      
@@ -84,6 +93,14 @@
       mounted(){
         this.fetchPosts();
       },
+
+      watch: {
+        selectedSort(newValue){
+          this.posts.sort((post1, post2) => {
+            return post1[newValue]?.localeCompare(post2[newValue]);
+          });
+        }
+      }
 
   }
 </script>
