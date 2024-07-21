@@ -1,18 +1,22 @@
 <template>
   <div class = "app">
-      <myButton @click="showDialog">создать пост</myButton>
-      <myDialog v-model:show="dialogVisible">
-        <postForm 
-        @createPost="createPost"
-        />
-      </myDialog>
+    <div class="app__buttons">
+        <myButton @click="showDialog">создать пост</myButton>
+        <mySelect></mySelect>
+    </div>
 
-      <postList 
-      :posts="posts"
-      @remove="removePost"
-      v-if="!isPostLoading"
+    <myDialog v-model:show="dialogVisible">
+      <postForm 
+      @createPost="createPost"
       />
-      <div v-else>Идет загрузка...</div>
+    </myDialog>
+
+    <postList 
+    :posts="posts"
+    @remove="removePost"
+    v-if="!isPostLoading"
+    />
+    <div v-else>Идет загрузка...</div>
   </div>
 </template>
 
@@ -58,21 +62,19 @@
         async fetchPosts(){
           try {
             this.isPostLoading = true;
-            setTimeout(async () => {
-              const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
-              this.posts = response.data;
-              this.isPostLoading = false;
-            }, 1000);
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+            this.posts = response.data;
+            this.isPostLoading = false;
           } 
-
           catch (error) {
             alert('Ошибка на стороне сервера');
+          }
+          finally{
+            this.isPostLoading = false;
           }
         }
 
       },
-
-      
 
       components: {
         postList,
@@ -104,5 +106,10 @@
   
   button {
    cursor: pointer;
+  }
+
+  .app__buttons{
+    display:flex;
+    justify-content: space-between;
   }
 </style>
