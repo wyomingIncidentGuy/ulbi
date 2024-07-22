@@ -110,9 +110,9 @@
           }
         },
 
-        async floadPosts(){
+        async loadPosts(){
           try {
-            this.isPostLoading = true;
+            this.page += 1;
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
               params:{
                 _page: this.page,
@@ -124,9 +124,6 @@
           } 
           catch (error) {
             alert('Ошибка на стороне сервера');
-          }
-          finally{
-            this.isPostLoading = false;
           }
         },
 
@@ -148,9 +145,9 @@
           threshold: 1.0,
         };
 
-        const callback = function(entries, observer){
-          if(entries[0].isIntersecting){
-            console.log('intersected');
+        const callback = (entries, observer) => {
+          if(entries[0].isIntersecting && this.page < this.totalPage){
+            this.loadPosts();
           }
         }
 
