@@ -22,14 +22,22 @@
     @remove="removePost"
     v-if="!isPostLoading"
     />
+    
     <div v-else>Идет загрузка...</div>
-    <div class="page__wrapper">
+    <div ref="observer" class="observer"></div>
+
+    <!-- <div class="page__wrapper">
       <div
-      v-for="page in totalPage"
-      :key="page"
+      v-for="pageNumber in totalPage"
+      :key="pageNumber"
       class="page"
-      >{{ page }}</div>
-    </div>
+      :class="{
+        'current__page':page === pageNumber
+      }"
+      @click="changePage(pageNumber)"
+      >{{ pageNumber }}</div>
+    </div> -->
+
   </div>
 </template>
 
@@ -100,7 +108,31 @@
           finally{
             this.isPostLoading = false;
           }
-        }
+        },
+
+        async floadPosts(){
+          try {
+            this.isPostLoading = true;
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+              params:{
+                _page: this.page,
+                _limit: this.limit
+              }
+            });
+            this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit);
+            this.posts = [...this.posts, ...response.data];
+          } 
+          catch (error) {
+            alert('Ошибка на стороне сервера');
+          }
+          finally{
+            this.isPostLoading = false;
+          }
+        },
+
+        // changePage(pageNumber){
+        //   this.page = pageNumber;
+        // }
 
       },
 
@@ -111,7 +143,21 @@
 
       mounted(){
         this.fetchPosts();
+        const options = {
+          rootMargin: "0px",
+          threshold: 1.0,
+        };
+
+        const callback = function(entries, observer){
+          if(entries[0].isIntersecting){
+            console.log('intersected');
+          }
+        }
+
+        const observer = new IntersectionObserver(callback, options);
+        observer.observe(this.$refs.observer);
       },
+
       computed: {
         sortedPosts(){
           return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]));
@@ -123,7 +169,9 @@
       },
       
       watch: {
-        
+        // page(){
+        //   this.fetchPosts();
+        // }
       }
 
   }
@@ -161,9 +209,16 @@
   .page{
     padding: 10px;
     border: solid black 1px;
+    cursor: pointer;
   }
 
   .current__page{
     border: solid red 1px;
+    cursor: pointer;
+  }
+
+  .observer{
+    height: 30px;
+    background-color: green;
   }
 </style>
