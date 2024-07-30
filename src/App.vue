@@ -1,4 +1,5 @@
 <template lang="">
+  <navBar />
   <div class = "app">
     <router-view></router-view>
   </div>
@@ -12,7 +13,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
   * {
       margin: 0;
       padding: 0;
