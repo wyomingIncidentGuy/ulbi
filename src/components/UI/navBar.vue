@@ -1,6 +1,6 @@
 <template>
     <div class = "navbar">
-        <h1>Vue Blog</h1>
+        <h1 @click="$router.push('/')">Vue Blog</h1>
         <div class="navbar__btns">
             <myButton @click="$router.push('/posts')">Посты</myButton>
             <myButton @click = "$router.push('/about')">О нас</myButton>
@@ -22,5 +22,8 @@ export default {
         display:flex;
         align-items: center;
         justify-content: space-between;
+    }
+    h1{
+        cursor: pointer;
     }
 </style>
