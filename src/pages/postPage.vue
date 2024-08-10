@@ -1,6 +1,7 @@
 <template>
     <div>
       <myInput 
+      v-focus
       v-model="searchQuiery"
       />
       <div class="app__buttons">
