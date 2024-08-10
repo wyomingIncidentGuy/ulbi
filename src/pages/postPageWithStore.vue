@@ -1,5 +1,4 @@
 <template>
-  <h1>{{ $store.state.likes }}</h1>
     <div>
       <myInput 
       v-focus
