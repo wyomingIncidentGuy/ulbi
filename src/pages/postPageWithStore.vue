@@ -22,7 +22,7 @@
       </myDialog>
   
       <postList 
-        :posts="posts"
+        :posts="searchedSortedPosts"
         @remove="removePost"
         v-if="!isPostLoading"
       />
